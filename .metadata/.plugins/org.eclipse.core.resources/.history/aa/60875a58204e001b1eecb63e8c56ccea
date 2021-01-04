@@ -1,0 +1,3 @@
+INSERT INTO tb_account (type_Account, balence) VALUES ('Conta Corrente', 1000);
+INSERT INTO tb_account (type_Account, balence) VALUES ('Conta Poupança', 1500);
+INSERT INTO tb_account (type_Account, balence) VALUES ('Conta Investimento', 2000);

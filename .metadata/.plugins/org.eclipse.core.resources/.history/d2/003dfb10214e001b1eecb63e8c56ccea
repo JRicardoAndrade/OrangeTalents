@@ -1,0 +1,9 @@
+INSERT INTO tb_account (typeAccount) VALUES ('Conta Corrente');
+INSERT INTO tb_account (typeAccount) VALUES ('Conta Poupança');
+INSERT INTO tb_account (typeAccount) VALUES ('Conta INvestimento');
+
+INSERT INTO tb_client (accountNumber, name, email, cpf, birth) VALUES (1, 'Tulio','tulio@email.com.br', 44444444444, TIMESTAMP WITH TIME ZONE '2013-07-21T20:59:19Z');
+INSERT INTO tb_client (accountNumber, name, email, cpf, birth) VALUES (2, 'Alex','alex@email.com.br' 33333333333, TIMESTAMP WITH TIME ZONE '1968-06-20T20:30:26Z');
+INSERT INTO tb_client (accountNumber, name, email, cpf, birth) VALUES(3, 'Marcos','marcos@email.com.br', 45112312332, TIMESTAMP WITH TIME ZONE '1999-06-15T15:01:37Z');
+INSERT INTO tb_client (accountNumber, name, email, cpf, birth) VALUES (2, 'Tony','tony@email.com.br', 32678978900, TIMESTAMP WITH TIME ZONE '1980-05-22T19:05:38Z');
+INSERT INTO tb_client (accountNumber, name, email, cpf, birth) VALUES (1, 'Meire', 'meire@email.com.br',24098765432, TIMESTAMP WITH TIME ZONE '2000-07-11T11:31:03Z');

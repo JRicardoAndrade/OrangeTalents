@@ -1,0 +1,75 @@
+package com.ricardo.orangeTalent.services;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ricardo.orangeTalent.dto.AccountDTO;
+import com.ricardo.orangeTalent.entities.Account;
+import com.ricardo.orangeTalent.repositories.AccountRepository;
+import com.ricardo.orangeTalent.services.exceptions.DataBaseException;
+import com.ricardo.orangeTalent.services.exceptions.ResourceNotFoundException;
+
+
+
+@Service
+public class AccountService {
+	
+	@Autowired
+	private AccountRepository repository;
+	
+	@Transactional (readOnly= true)
+	public List<AccountDTO> findAll(){
+		List<Account> list = repository.findAll();
+		
+		return list.stream().map(x -> new AccountDTO(x)).collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public AccountDTO findById(Long accountNumber) {
+		Optional <Account> obj = repository.findById(accountNumber);
+		Account entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new AccountDTO(entity);
+	}
+
+	@Transactional
+	public AccountDTO insert(AccountDTO dto) {
+		Account entity = new Account();
+		entity.setTypeAccount(dto.getTypeAccount());
+		entity = repository.save(entity);
+		return new AccountDTO(entity);
+	}
+
+	@Transactional
+	public AccountDTO update(Long accountNumber, AccountDTO dto) {
+		try {
+		Account entity = repository.getOne(accountNumber);
+		entity.setTypeAccount(dto.getTypeAccount());
+		entity = repository.save(entity);
+		return new AccountDTO(entity);
+		}
+		catch (EntityNotFoundException e){
+			throw new ResourceNotFoundException("Account not found " + accountNumber);
+		}
+	}
+
+	public void delete(Long accountNumber) {
+		try {
+		repository.deleteById(accountNumber);
+		}
+		catch (EmptyResultDataAccessException e){
+			throw new ResourceNotFoundException ("Account not found "+ accountNumber);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataBaseException ("Integrity Violation");
+		}
+	}
+}

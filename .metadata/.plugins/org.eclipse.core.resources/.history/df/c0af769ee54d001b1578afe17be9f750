@@ -1,0 +1,5 @@
+package com.ricardo.orangeTalent.dto;
+
+public class AccountDTO {
+
+}

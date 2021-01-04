@@ -1,0 +1,61 @@
+package com.ricardo.orangeTalent.resources;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.ricardo.orangeTalent.dto.AccountDTO;
+import com.ricardo.orangeTalent.services.AccountService;
+
+@RestController
+@RequestMapping(value= "/accounties")
+public class AccountResource {
+	
+	@Autowired
+	private AccountService service;
+	
+	@GetMapping
+	public ResponseEntity<List<AccountDTO>> findAll() {
+		List<AccountDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+
+	@GetMapping(value= "/{accountNumber}")
+	public ResponseEntity<AccountDTO> findById(@PathVariable Long accountNumber) {
+		AccountDTO dto = service.findById(accountNumber);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	@PostMapping
+	public ResponseEntity<AccountDTO> insert(@RequestBody AccountDTO dto) {
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{accountNumber}").buildAndExpand(dto.getAccountNumber()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@PutMapping(value= "/{accountNumber}")
+	public ResponseEntity<AccountDTO> update(@PathVariable Long accountNumber, @RequestBody AccountDTO dto) {
+		dto = service.update(accountNumber, dto);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+
+	@DeleteMapping(value= "/{accountNumber}")
+	public ResponseEntity<AccountDTO> delete(@PathVariable Long accountNumber) {
+		dto = service.delete(accountNumber);
+		return ResponseEntity.noContent().build();
+	}
+}

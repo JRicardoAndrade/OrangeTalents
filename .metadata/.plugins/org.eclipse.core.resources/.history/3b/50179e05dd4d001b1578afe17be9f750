@@ -1,0 +1,21 @@
+package com.ricardo.orangeTalent.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ricardo.orangeTalent.entities.Account;
+import com.ricardo.orangeTalent.repositories.AccountRepository;
+
+@Service
+public class AccountService {
+	
+	@Autowired
+	private AccountRepository repository;
+	
+	public List<Account> findAll(){
+		return repository.findAll();
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.ricardo.orangeTalent.resources;
+
+public class AccountResource {
+
+}

@@ -1,0 +1,3 @@
+INSERT INTO tb_account (type_Account) VALUES ('Conta Corrente');
+INSERT INTO tb_account (type_Account) VALUES ('Conta Poupança');
+INSERT INTO tb_account (type_Account) VALUES ('Conta Investimento');

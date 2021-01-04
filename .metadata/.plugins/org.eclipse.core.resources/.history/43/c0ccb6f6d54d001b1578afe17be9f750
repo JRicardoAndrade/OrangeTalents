@@ -1,0 +1,5 @@
+package com.ricardo.orangeTalent.repositories;
+
+public class AccountRepository {
+
+}

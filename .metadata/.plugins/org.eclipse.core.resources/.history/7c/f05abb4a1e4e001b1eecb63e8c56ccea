@@ -1,0 +1,5 @@
+package com.ricardo.orangeTalent.entities;
+
+public class Client {
+
+}

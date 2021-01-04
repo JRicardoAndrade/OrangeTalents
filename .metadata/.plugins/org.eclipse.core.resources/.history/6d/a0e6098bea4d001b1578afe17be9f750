@@ -1,0 +1,26 @@
+package com.ricardo.orangeTalent.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ricardo.orangeTalent.dto.AccountDTO;
+import com.ricardo.orangeTalent.entities.Account;
+import com.ricardo.orangeTalent.repositories.AccountRepository;
+
+@Service
+public class AccountService {
+	
+	@Autowired
+	private AccountRepository repository;
+	
+	@Transactional (readOnly= true)
+	public List<AccountDTO> findAll(){
+		List<Account> list = repository.findAll();
+		
+		return list.stream().map(x -> new AccountDTO(x)).collect(Collectors.toList());
+	}
+}

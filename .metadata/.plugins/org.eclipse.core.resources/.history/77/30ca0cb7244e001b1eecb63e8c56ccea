@@ -1,0 +1,5 @@
+INSERT INTO tb_account (type_Account) VALUES ('Conta Corrente');
+INSERT INTO tb_account (type_Account) VALUES ('Conta Poupança');
+INSERT INTO tb_account (type_Account) VALUES ('Conta Investimento');
+
+INSERT INTO tb_client (name, email, cpf, birth) VALUES ('Tulio','tulio@email.com.br', 44444444444, TIMESTAMP WITH TIME ZONE '2013-07-21T20:59:19Z');
